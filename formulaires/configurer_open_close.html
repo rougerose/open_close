@@ -1,0 +1,37 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+  [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+  [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+  <form method="post" action="#ENV{action}">
+    <div>
+      #ACTION_FORMULAIRE{#ENV{action}}
+
+      <fieldset>
+        <legend><:open_close:config_titre_horaires_resume:></legend>
+        [(#SAISIE{explication, info_horaires_resume, texte=<:open_close:config_info_horaires_resume:>})]
+        [(#SAISIE{textarea, horaires_resume, rows=5})]
+      </fieldset>
+      <fieldset>
+        <legend><:open_close:config_titre_horaires_quotidiens:></legend>
+        [(#SAISIE{explication, info_horaires_quotidiens, texte=<:open_close:config_info_horaires_quotidiens:>})]
+        [(#SAISIE{input, jour_1, label=<:open_close:config_label_jour1:>})]
+        [(#SAISIE{input, jour_2, label=<:open_close:config_label_jour2:>})]
+        [(#SAISIE{input, jour_3, label=<:open_close:config_label_jour3:>})]
+        [(#SAISIE{input, jour_4, label=<:open_close:config_label_jour4:>})]
+        [(#SAISIE{input, jour_5, label=<:open_close:config_label_jour5:>})]
+        [(#SAISIE{input, jour_6, label=<:open_close:config_label_jour6:>})]
+        [(#SAISIE{input, jour_7, label=<:open_close:config_label_jour7:>})]
+      </fieldset>
+      <fieldset>
+        <legend>Vacances</legend>
+        [(#SAISIE{explication, info_vacances, texte=<:open_close:config_info_vacances:>})]
+        [(#SAISIE{date, vacances_debut, label=Du})]
+        [(#SAISIE{date, vacances_fin, label=Au})]
+      </fieldset>
+
+      <input type="hidden" name="_meta_casier" value="open_close"/>
+      <p class="boutons">
+        <span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>"/>
+      </p>
+    </div>
+  </form>
+</div>
