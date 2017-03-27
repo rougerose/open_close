@@ -9,7 +9,8 @@ $GLOBALS[$GLOBALS['idx_lang']]  = array(
     2- pour des horaires avec interruption : <code>HH:mm-HH:mm, HH:mm-HH:mm</code><br> Exemple : <code>09:00-13:00, 14:00-19:00</code>\n
     3- pour les jours de fermeture : le champs doit rester vide.",
   'config_info_horaires_resume'      => 'Les horaires saisis ci-dessous seront affichés tels quels sur les pages publiques du site',
-  'config_info_vacances' => 'Les prochaines dates de vacances. La saisie est de type <code>JJ/MM/AAAA</code>',
+  'config_info_vacances'             => 'Les prochaines dates de vacances. La saisie est de type <code>JJ/MM/AAAA</code>',
+  'config_label_horaires_resume'     => 'Infos ouverture',
   'config_label_jour1'               => 'Lundi',
   'config_label_jour2'               => 'Mardi',
   'config_label_jour3'               => 'Mercredi',
@@ -17,7 +18,11 @@ $GLOBALS[$GLOBALS['idx_lang']]  = array(
   'config_label_jour5'               => 'Vendredi',
   'config_label_jour6'               => 'Samedi',
   'config_label_jour7'               => 'Dimanche',
+  'config_label_vacances_debut'      => 'Du',
+  'config_label_vacances_fin'        => 'Au',
+  'config_menu_titre'                => 'Horaires',
   'config_titre_horaires_quotidiens' => 'Horaires quotidiens',
   'config_titre_horaires_resume'     => 'Horaires en résumé',
-  'config_titre_page'                => 'Saisir les horaires d\'ouverture'
+  'config_titre_page'                => 'Saisir les horaires d\'ouverture',
+  'config_titre_vacances'            => 'Vacances'
 );
