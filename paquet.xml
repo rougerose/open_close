@@ -14,5 +14,6 @@
   <necessite nom="saisies" compatibilite="[1.24.0;]" />
   <necessite nom="timezone" compatibilite="[0.1.1;]" />
   <necessite nom="verifier" compatibilite="[1.6.3;]" />
+  <necessite nom="agenda" compatibilite="[3.18.3;3.18.*]" />
   <menu nom="configurer_open_close" titre="open_close:config_menu_titre" parent="menu_configuration" icone="images/openclose-16.png" />
 </paquet>
