@@ -37,7 +37,7 @@ function filtre_isOpenClose($date, $msg_ouvert, $msg_ferme, $msg_vacances) {
     foreach ($oc as $cle => $valeur) {
       // horaires
       if (strstr($cle, 'jour_')) {
-        $jour = substr($cle, 5);
+        $jour = substr($cle, 5) - 1;
         $horaire = array_map('trim', explode(',', $valeur));
         $horaires[$semaine[$jour]] = $horaire;
       }
@@ -62,7 +62,7 @@ function filtre_isOpenClose($date, $msg_ouvert, $msg_ferme, $msg_vacances) {
 
       if ( agenda_date_a_venir($vacances['fin']) ) {
         $debut_jour_court = affdate_jourcourt($vacances['debut']);
-        $fin_jour_court = affdate_jourcourt($vacances['fin']);
+        $fin_jour_court = affdate($vacances['fin']);
         $message = _L($msg_vacances, array('date_debut' => $debut_jour_court, 'date_fin' => $fin_jour_court));
       }
 
