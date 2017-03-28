@@ -30,7 +30,8 @@ function filtre_isOpenClose($date, $msg_ouvert, $msg_ferme, $msg_vacances) {
     date_default_timezone_set($tz);
 
     $semaine = array('mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun');
-
+    $horaires = array();
+    $exceptions = array();
     $message = $msg_ferme;
 
     foreach ($oc as $cle => $valeur) {
