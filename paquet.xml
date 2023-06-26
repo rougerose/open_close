@@ -3,10 +3,10 @@
   categorie="date"
   version="1.0.2"
   etat="test"
-  compatibilite="[3.0.20;3.2.*]"
+  compatibilite="[3.0.20;4.2.*]"
   logo="prive/themes/spip/images/openclose-48.png"
   documentation=""
-  schema="1.0.0"
+  schema="1.0.1"
 >
   <nom>Ouvert ou fermé ?</nom>
   <auteur>christophe le drean</auteur>
