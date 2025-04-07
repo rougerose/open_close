@@ -1,7 +1,7 @@
 <?php
 
 if (!defined('_ECRIRE_INC_VERSION')) {
-  return;
+	return;
 }
 
 /**
@@ -21,72 +21,69 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function filtre_isOpenClose($date, $msg_ouvert, $msg_ferme, $msg_vacances) {
 
-  include_spip('lib/php-store-hours/StoreHours.class');
+	include_spip('lib/php-store-hours/StoreHours.class');
 
-  $tz = lire_config('timezone');
-  $oc = lire_config('open_close');
+	$tz = lire_config('timezone');
+	$oc = lire_config('open_close');
 
-  if ( isset($tz) AND isset($oc) ) {
-    date_default_timezone_set($tz);
+	if (isset($tz) and isset($oc)) {
+		date_default_timezone_set($tz);
 
-    $semaine = array('mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun');
-    $horaires = array();
-    $exceptions = array();
-    $message = $msg_ferme;
+		$semaine = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+		$horaires = [];
+		$exceptions = [];
+		$message = $msg_ferme;
 
-    foreach ($oc as $cle => $valeur) {
-      // horaires
-      if (strstr($cle, 'jour_')) {
-        $jour = substr($cle, 5) - 1;
-        $horaire = array_map('trim', explode(',', $valeur));
-        $horaires[$semaine[$jour]] = $horaire;
-      }
+		foreach ($oc as $cle => $valeur) {
+			// horaires
+			if (strstr($cle, 'jour_')) {
+				$jour = substr($cle, 5) - 1;
+				$horaire = array_map('trim', explode(',', $valeur));
+				$horaires[$semaine[$jour]] = $horaire;
+			}
 
-      // vacances
-      if ( strstr($cle, 'vacances_') AND !empty($valeur) ) {
-        // vacances_debut et vacances_fin
-        $periodes = substr($cle, 9);
+			// vacances
+			if (strstr($cle, 'vacances_') and !empty($valeur)) {
+				// vacances_debut et vacances_fin
+				$periodes = substr($cle, 9);
 
-        // convertir la date jj/mm/aaaa en Y-m-d
-        $date = date_create_from_format('j/m/Y', $valeur);
-        $vacances[$periodes] = date_format($date, 'Y-m-d');
-      }
-    }
+				// convertir la date jj/mm/aaaa en Y-m-d
+				$date = date_create_from_format('j/m/Y', $valeur);
+				$vacances[$periodes] = date_format($date, 'Y-m-d');
+			}
+		}
 
-    if ( count($vacances) == 2 ) {
-      $debut = new DateTime($vacances['debut']);
-      $fin = new DateTime($vacances['fin']);
-      $fin = $fin->modify('+1 day');
-      $interval = new DateInterval('P1D');
-      $dates = new DatePeriod($debut, $interval, $fin);
+		if (count($vacances) == 2) {
+			$debut = new DateTime($vacances['debut']);
+			$fin = new DateTime($vacances['fin']);
+			$fin = $fin->modify('+1 day');
+			$interval = new DateInterval('P1D');
+			$dates = new DatePeriod($debut, $interval, $fin);
 
-      if ( agenda_date_a_venir($vacances['fin']) ) {
-        $debut_jour_court = affdate_jourcourt($vacances['debut']);
-        $fin_jour_court = affdate($vacances['fin']);
-        $message = _L($msg_vacances, array('date_debut' => $debut_jour_court, 'date_fin' => $fin_jour_court));
-      }
+			if (agenda_date_a_venir($vacances['fin'])) {
+				$debut_jour_court = affdate_jourcourt($vacances['debut']);
+				$fin_jour_court = affdate($vacances['fin']);
+				$message = _L($msg_vacances, ['date_debut' => $debut_jour_court, 'date_fin' => $fin_jour_court]);
+			}
 
-      foreach($dates as $date) {
-        $cle = $date->format('Y-m-d');
-        $exceptions[$cle] = array();
-      }
-    }
+			foreach ($dates as $date) {
+				$cle = $date->format('Y-m-d');
+				$exceptions[$cle] = [];
+			}
+		}
 
-    $store_hours = new StoreHours($horaires, $exceptions);
+		$store_hours = new StoreHours($horaires, $exceptions);
 
-    if( $store_hours->is_open() ) {
+		if ($store_hours->is_open()) {
 
-      return $msg_ouvert;
+			return $msg_ouvert;
 
-    } else {
+		}
 
-      return $message;
+		return $message;
 
-    }
+	}
 
-  } else {
+	return '';
 
-    return '';
-
-  }
 }
